@@ -57,6 +57,7 @@ export default function LoginForm() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Input Username"
             className="mt-2 block w-full px-6 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-700 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-200"
             required
           />
@@ -69,6 +70,7 @@ export default function LoginForm() {
           <input
             type="password"
             value={password}
+            placeholder="Input Pass"
             onChange={(e) => setPassword(e.target.value)}
             className="mt-2 block w-full px-6 py-3 rounded-xl border-2 border-gray-300 dark:border-gray-700 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-200"
             required
