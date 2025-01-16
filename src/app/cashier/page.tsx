@@ -57,6 +57,7 @@ export default function CashierDashboard() {
   }
 
   const fetchVehicles = async () => {
+    console.log('fetchVehicles')
     const token = localStorage.getItem('token')
     await fetch('/api/vehicles', {
       method: 'GET',

@@ -40,6 +40,8 @@ const vehicle: Vehicle[] = [
 export default function AdminDashboard() {
   const router = useRouter()
 
+  const [vehicles, setVehicles] = useState<Vehicle[]>([])
+
   const handleLogout = () => {
     // Remove the token and user from localStorage
     localStorage.removeItem('token')
@@ -48,36 +50,25 @@ export default function AdminDashboard() {
     // Redirect to the login page
     router.push('/')
   }
+  const fetchVehicles = async () => {
+    console.log('fetchVehicles admin')
+    const token = localStorage.getItem('token')
+    await fetch('/api/vehicles', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => setVehicles([...vehicle, ...data]))
+      .catch((error) => console.error('Error:', error))
+  }
 
   useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const token = localStorage.getItem('token')
-
-        if (token !== 'true') {
-          // setError('User is not logged in.')
-          return
-        }
-
-        // Make the API request for vehicles
-        await fetch('/api/vehicles', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-          .then((response) => response.json())
-          .then((data) => setVehicles(data))
-          .catch((error) => console.error('Error:', error))
-      } catch (error: any) {
-        console.error('Error fetching vehicles:', error)
-      }
-    }
-
     fetchVehicles()
   }, [])
 
-  const [vehicles, setVehicles] = useState<Vehicle[]>(vehicle)
+  console.log(vehicles, 'vehicles')
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
