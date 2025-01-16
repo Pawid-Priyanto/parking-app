@@ -43,6 +43,8 @@ export async function POST(req: Request) {
   const authHeader = req.headers.get('Authorization')
   const token = authHeader?.split(' ')[1] // Extract token from Authorization header
 
+  console.log(authHeader, 'authHeader')
+
   if (!token) {
     return NextResponse.json(
       { error: 'Unauthorized: No token provided' },

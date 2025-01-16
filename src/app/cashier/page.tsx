@@ -58,14 +58,14 @@ export default function CashierDashboard() {
 
   const fetchVehicles = async () => {
     const token = localStorage.getItem('token')
-    await fetch('http://localhost:3000/api/vehicles', {
+    await fetch('/api/vehicles', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => setVehicles(data))
       .catch((error) => console.error('Error:', error))
   }
 
@@ -89,7 +89,6 @@ export default function CashierDashboard() {
     }
 
     const token = localStorage.getItem('token')
-    console.log(token, 'token ??')
     if (!token) {
       alert('Token tidak ditemukan! Silakan login.')
       return
@@ -105,12 +104,9 @@ export default function CashierDashboard() {
         }
       })
 
-      console.log(response, 'response')
-
       if (!response.ok) {
         throw new Error(`Unauthorized: ${response.statusText}`)
       }
-      console.log(response, 'response')
       setPlateNumber('')
       setVehicles([...vehicles, newVehicle])
       await fetchVehicles()

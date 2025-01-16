@@ -22,8 +22,6 @@ export default function LoginForm() {
 
     const data = await res.json()
 
-    console.log(data, 'data token')
-
     if (res.ok && data.token) {
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))

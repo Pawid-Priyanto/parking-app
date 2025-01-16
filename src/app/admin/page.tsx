@@ -42,7 +42,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     // Remove the token and user from localStorage
-    localStorage.removeItem('isLogin')
+    localStorage.removeItem('token')
     localStorage.removeItem('user')
 
     // Redirect to the login page
@@ -52,28 +52,25 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        // Check if user is logged in by checking 'isLogin' in localStorage
-        const isLogin = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
 
-        if (isLogin !== 'true') {
+        if (token !== 'true') {
           // setError('User is not logged in.')
           return
         }
 
         // Make the API request for vehicles
-        const res = await fetch('/api/vehicles')
-
-        if (!res.ok) {
-          const errorData = await res.json()
-          throw new Error(errorData?.error || 'Failed to fetch vehicles')
-        }
-
-        const data = await res.json()
-        console.log('Fetched vehicles:', data)
-        setVehicles(data)
+        await fetch('/api/vehicles', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then((response) => response.json())
+          .then((data) => setVehicles(data))
+          .catch((error) => console.error('Error:', error))
       } catch (error: any) {
         console.error('Error fetching vehicles:', error)
-        // setError(error.message || 'An unknown error occurred')
       }
     }
 
