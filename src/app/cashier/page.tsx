@@ -66,7 +66,7 @@ export default function CashierDashboard() {
       }
     })
       .then((response) => response.json())
-      .then((data) => setVehicles(data))
+      .then((data) => setVehicles([...vehicle, ...data]))
       .catch((error) => console.error('Error:', error))
   }
 
