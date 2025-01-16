@@ -84,11 +84,12 @@ export default function CashierDashboard() {
 
     /* eslint-disable @typescript-eslint/no-unused-vars */
 
-    const newVehicle: any = {
+    const newVehicle: Vehicle = {
       type: vehicleType,
       plateNumber,
       floor,
-      entryTime: new Date()
+      entryTime: new Date(),
+      id: vehicles.length + 1
     }
 
     const token = localStorage.getItem('token')
