@@ -8,6 +8,7 @@ const verifyToken = (token: string) => {
   try {
     return jwt.verify(token, JWT_SECRET)
   } catch (error) {
+    console.log(error)
     return null // If verification fails, return null
   }
 }
@@ -42,8 +43,6 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const authHeader = req.headers.get('Authorization')
   const token = authHeader?.split(' ')[1] // Extract token from Authorization header
-
-  console.log(authHeader, 'authHeader')
 
   if (!token) {
     return NextResponse.json(

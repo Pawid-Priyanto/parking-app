@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = 'your-secret-key'

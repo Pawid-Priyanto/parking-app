@@ -82,6 +82,8 @@ export default function CashierDashboard() {
       return
     }
 
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+
     const newVehicle: any = {
       type: vehicleType,
       plateNumber,

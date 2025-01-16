@@ -2,7 +2,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { LogOut, Car, Bike, Moon, Sun } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { Vehicle } from '../types'
 import { useEffect, useState } from 'react'
 
